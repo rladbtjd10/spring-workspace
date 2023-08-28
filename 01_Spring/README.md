@@ -44,3 +44,74 @@
 - 스프링 애플리케이션 컨텍스트에서 빈(Bean)을 로드하고 이 컨텍스트에 있는 빈을 이용하여 테스트 코드를 작성할 수 있다.
 
 
+# DI(Dependency Injection)
+
+## IoC(Inversion of Control)
+
+- 프로그램을 구동하는데 필요한 객체에 대한 생성, 변경 등의 관리를 개발자가 아닌 컨테이너에서 직접 관리하는 것을 말한다.
+- 스프링은 IoC 구조를 통해 구동 시 필요한 객체의 생성부터 소멸까지 해당 객체에 대한 관리를 직접 수행한다.
+<img src="https://user-images.githubusercontent.com/26870393/182604427-d5e9f400-cc8c-410e-b583-df5de4e50bbc.png">
+
+### 스프링 IoC 컨테이너
+- 스프링에서 관리하는 객체를 `빈(Bean)`이라고 하고, 해당 빈들을 관리한다는 의미로 컨테이너를 `빈 팩토리(Bean Factory)`라고 한다.
+
+### IoC 컽네이너의 역할
+- 객체(Bean)의 생명주기와 의존성을 관리한다.
+- 객체(Bean)의 생성, 초기화, 소멸 등의 처리를 담당한다.
+
+<img src="https://user-images.githubusercontent.com/26870393/182604584-41a1d804-b021-4443-b8e1-6e72885460e7.png">
+
+## DI
+
+- DI(Dependency Injection)란 하나의 객체가 사용하는(의존하는) 다른 객체를 외부에서 생성하고 주입받아 사용하는 것을 말한다.
+- 객체를 주입하는 방법으로는 메소드를 통한 의존성 주입 방법과 생성자를 통한 의존성 주입 방법이 있다.
+
+### DI 설정 방법 - XML 방식
+
+- 스프링 컨테이너 구동 시 생성해야 하는 객체(Bean)들과 의존 관계를 XML 파일로 작성하는 방식이다.
+- `<beans>` 요소는 최상위 요소로 하위 요소들로 다양한 스프링 설정할 수 있다.
+- `<bean>` 요소는 스프링 컨테이너가 관리할 빈을 선언하는 요소이다.
+
+```xml
+<beans>
+    <beans id="student" class="com.kh.model.vo.Student">
+</beans>
+```
+
+- Setter 메소드를 통해 의존 관계과 있는 빈을 주입하려면 `<property>` 요소를 사용한다. (단, 일치하는 setter 메소드가 있어야 한다.)
+
+```xml
+<beans>
+    <bean id="student" class="com.kh.model.vo.Student">
+        <property name="name" value="김아무" />
+        <property name="age" value="20" /> 
+        <property name="wallet" ref="money">
+    </bean>
+
+    <bean id="money" class="com.kh.model.vo.Wallet" />
+</beans>
+```
+
+- 생성자를 통해 의존 관계과 있는 빈을 주입하려면 `<constructor-arg>` 요소를 사용한다. (단, 일치하는 매개변수가 있는 생성자가 있어야 된다.)
+
+```xml
+<beans>
+    <bean id="student" class="com.kh.model.vo.Student">
+        <constuctor-arg name="name" value="김아무" />
+        <constuctor-arg name="Wallet" ref="money" />
+    </bean>
+
+    <bean id="money" class="com.kh.model.vo.Wallet" />
+</beans>
+```
+
+# AOP(Aspect Oriented Programming)
+
+- 관점 지향 프로그래밍(Aspect Oriented Programming)의 약자
+- 애플리케이션의 여러 부분에 걸쳐 있는 기능을 횡단 관심사(Cross-cutting concerns)라고 한다.
+- AOP는 횡단 관심사를 분리하고 분리한 기능을 어디에 어떻게 적용할지 선언적으로 정의할 수 있다.
+- AOP의 목적은 횡단 관심사와 이에 영향받는 객체 간 결합도를 낮추는데 있다.
+
+<img src="https://user-images.githubusercontent.com/26870393/182381535-d93c41eb-ab56-4d1f-bb24-df4732cb50a2.png">
+
+
