@@ -12,9 +12,9 @@ public class MemberDAO {
 	@Autowired //getsession 했던거랑 같은거
 	private SqlSessionTemplate sqlSession;
 	
-//	public int registerMember(Member vo) {
-//		return sqlSession.insert("memberMapper.registerMember", vo);
-//	}
+	public int registerMember(Member vo) {
+		return sqlSession.insert("memberMapper.registerMember", vo);
+	}
 	
 	/*
 	 * showAllMember
