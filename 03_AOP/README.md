@@ -50,7 +50,7 @@ public class 클래스명 {
     public void before() {
         // 메소드 실행 전에 적용되는 어드바이스를 정의
     }
-
+w
     @After("포인트컷 지정자")
     public void after() {
         // 메소드 실행 후에 적용되는 어드바이스를 정의

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	회원 정보가 없습니다.
 </body>
 </html>
