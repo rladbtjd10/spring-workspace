@@ -64,12 +64,13 @@ public class MemberController {
 		return "login";
 	}
 	
-	// signIn - 비지니스 로직 포함 : 파라미터 값 -> HttpServletRequest request
+	// signIn - 비즈니스 로직 포함
+	//   : 파라미터 값 -> HttpServletRequest request
 	// -> return "login_result"
-	@RequestMapping("signIn") 
-	public String signIn(Member vo, HttpServletRequest request) {
+	@RequestMapping("signIn")
+	public String signIn(Member vo, HttpSession session) {
 		Member member = service.login(vo);
-		HttpSession session = request.getSession();
+		
 		if(member != null) {
 			session.setAttribute("vo", member);
 		}
@@ -77,7 +78,7 @@ public class MemberController {
 	}
 	
 	
-	// allMember - 비지니스 로직 포함, 데이터바인딩 - Model --> return "find_ok";
+	// allMember - 비지니스 로직 포함, 데이터바인딩 - Model
 	// --> return "find_ok";
 	@RequestMapping("allMember") 
 	public String allMember(Model model) {

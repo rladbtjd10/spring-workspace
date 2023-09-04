@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<bean id="loginSuccess" class="com.kh.security.LoginSuccessHandler" />
+	<bean id="customAccessDenied" class="com.kh.security.CustomAccessDeniedHandler" />
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<context:component-scan base-package="com.kh.security"/>
+	<bean id="memberService" class="com.kh.security.model.service.MemberService"/>
+
+	<security:http> <!-- HTTP 요청에 대한 보안 구성을 정의 -->
+		<security:intercept-url pattern="/all" access="permitAll"/>
+		<security:intercept-url pattern="/member" access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')"/> <!-- URL 패턴에 대한 접근을 'ROLE_MEMBER' 또는 'ROLE_ADMIN' 역할을 가진 사용자로 제한 -->
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+		<security:form-login login-page="/login" authentication-success-handler-ref="loginSuccess"/>  <!-- authentication-success-handler-ref="loginSuccess": 사용자 지정 인증 성공 처리기(구성의 다른 곳에서 정의될 수 있음)를 참조합니다. -->
+		
+		<security:csrf disabled="true" /> <!-- CSRF(사이트간 요청 위조) 보호를 비활성화합니다. -->
+		<security:logout logout-url="/logout" invalidate-session="true"/> <!-- invalidate-session="true": 사용자가 로그아웃하면 사용자의 세션이 무효화됩니다. -->
+		
+		<!-- 멤버가 admin페이지 접속했을 때 접근 거부하는 핸들러 -->
+	
+		<!-- <security:access-denied-handler error-page="/error"/> --> <!--바로 접근제한 페이지로 연결하는 방법, 접근을 거부하는 handler 지정하겠다 -->
+		<security:access-denied-handler ref="customAccessDenied"/> <!-- 컨트롤러로 연결하는 방법 -->
+	</security:http>
+	
+	<security:authentication-manager> <!-- 인증 매니저 -->
+		<security:authentication-provider user-service-ref="memberService">
+			<!-- <security:user-service>
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER" />
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_ADMIN" />
+			</security:user-service> -->
+			<security:password-encoder hash="bcrypt"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	
+		
+
+</beans>
