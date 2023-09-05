@@ -162,7 +162,7 @@
 
       
       
-      <Context docBase="05_MVC_Board" path="/" reloadable="true" source="org.eclipse.jst.jee.server:05_MVC_Board"/></Host>
+      <Context docBase="07_RestAPI" path="/api" reloadable="true" source="org.eclipse.jst.jee.server:07_RestAPI"/></Host>
     </Engine>
   </Service>
 </Server>

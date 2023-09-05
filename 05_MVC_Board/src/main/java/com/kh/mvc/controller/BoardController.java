@@ -59,7 +59,7 @@ public class BoardController {
 	@PostMapping("/insert")
 	public String insert(Board board) throws IllegalStateException, IOException {
 		
-		// ÆÄÀÏ ¾÷·Îµå ±â´É 
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ 
 		fileUpload(board);
 		
 		service.insertBoard(board);
@@ -81,27 +81,27 @@ public class BoardController {
 		MultipartFile file = board.getUploadFile();
 		System.out.println("file : " + file);
 		
-		if(!file.isEmpty()) { // ¾÷·ÎµåÇÑ ÆÄÀÏÀÌ ÀÖ´Â °æ¿ì!
+		if(!file.isEmpty()) { // ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½!
 							
-			// ±âÁ¸¿¡ ÆÄÀÏÀÌ ÀÖ´Â °æ¿ì »èÁ¦!
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
 			if(board.getUrl()!=null) {
-				File delFile = new File(path + board.getUrl().replace("/upload/", "")); //ÆÄÀÏ¸í¸¸ ³²À½
+				File delFile = new File(path + board.getUrl().replace("/upload/", "")); //ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 				delFile.delete();
 			}
 			
-			System.out.println("ÆÄÀÏÀÇ »çÀÌÁî : " + file.getSize());
-			System.out.println("¾÷·ÎµåµÈ ÆÄÀÏ¸í : " + file.getOriginalFilename());
-			System.out.println("ÆÄÀÏÀÇ ÆÄ¶ó¹ÌÅÍ¸í : " + file.getName());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + file.getSize());
+			System.out.println("ï¿½ï¿½ï¿½Îµï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ : " + file.getOriginalFilename());
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ : " + file.getName());
 			
 			
-			// Áßº¹ ¹æÁö¸¦ À§ÇÑ UUID Àû¿ë
+			// ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ UUID ï¿½ï¿½ï¿½ï¿½
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid.toString() + "_" + file.getOriginalFilename();
 			
 			File copyFile = new File(path + filename);
-			file.transferTo(copyFile); // ¾÷·ÎµåÇÑ ÆÄÀÏÀÌ ÁöÁ¤ÇÑ path À§Ä¡·Î ÀúÀå
+			file.transferTo(copyFile); // ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ path ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
-			// µ¥ÀÌÅÍº£ÀÌ½º¿¡ °æ·Î ÀúÀå
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			board.setUrl("/upload/" + filename);
 		}
 		
@@ -110,7 +110,7 @@ public class BoardController {
 	@PostMapping("/update")
 	public String update(Board board) throws IllegalStateException, IOException {
 		
-		// ÆÄÀÏ ¾÷·Îµå ±â´É
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½
 		fileUpload(board);
 		
 		service.updateBoard(board);
@@ -120,9 +120,9 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(int no) {
 		Board board = service.selectBoard(no);
-		// ±âÁ¸¿¡ ÆÄÀÏÀÌ ÀÖ´Â °æ¿ì »èÁ¦!
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!
 		if(board.getUrl()!=null) {
-			File delFile = new File(path + board.getUrl().replace("/upload/", "")); //ÆÄÀÏ¸í¸¸ ³²À½
+			File delFile = new File(path + board.getUrl().replace("/upload/", "")); //ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 			delFile.delete();
 		}
 		service.deleteBoard(no);

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="phone">
+	
+	<insert id="insertPhone" parameterType="Phone">
+		INSERT INTO phone(num, model, price, vcode)
+		VALUES (#{num}, #{model}, #{price}, #{vcode})
+	</insert>
+	
+	<!--  Dynamic Query : selectAll + selectOne (num) num를 입력하면 하나만 보이고 입력안하면 전체보이는거요--> 
+	<select id="selectAll" parameterType="String" resultType="Phone">
+		
+	</select>
+	
+	<delete id="deletePhone" >
+		DELETE
+	</delete>
+	
+	<update id="updatePhone" parameterType="Phone">
+		UPDATE phone
+		SET model=#{model}, price=#{price}, vcode=#{vcode}
+		WHERE num=#{num}
+	</update>
+	
+	<!-- Dynamic Query : id와 pw 둘다 입력했을때랑 id만 입력햇을때 -->
+	<select id="selectUser">
+		SELECT * FROM 
+	</select>
+	
+</mapper>

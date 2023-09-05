@@ -16,8 +16,8 @@ public class Member implements UserDetails {
 	private String password;
 	private String name;
 	private String address;
-	private String auth;
-	private int enabled;
+	private String auth; //인증
+	private int enabled; //상태 표시기, 이진 상태를 나타내는 데 사용될 수 있음을 시사합니다(예: 비활성화된 경우 0, 활성화된 경우 1).
 	
 	// getAuthorities : 회원의 auth(role) 역할에 해당하는 정보 getter
 	
