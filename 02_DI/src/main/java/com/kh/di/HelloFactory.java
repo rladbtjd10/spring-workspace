@@ -5,24 +5,23 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-// hello.properties(ºÎ°¡Á¤º¸, meta-data)ÀÇ ³»¿ëÀ» ÀĞ¾î 
-// Hello °´Ã¼¸¦ »ı¼º return
+// hello.properties(ë¶€ê°€ì •ë³´, meta-data)ì˜ ë‚´ìš©ì„ ì½ì–´ 
+// Hello ê°ì²´ë¥¼ ìƒì„± return
 public class HelloFactory {
 	
 	private Hello hello;
 	private Properties properties;
-	
+
 	private static HelloFactory helloFactory;
 	private HelloFactory() {}
-	public synchronized static HelloFactory getInstance() { // Synchronized(µ¿±âÈ­)-ÇÏ³ª¾¿ÇÏ³ª¾¿ Ã³¸®ÇÏ°íÀÚ ÇÒ¶§ / ¿©·¯°³ÀÇ ½º·¹µå°¡ ÇÑ°³ÀÇ ÀÚ¿øÀ» »ç¿ëÇÏ°íÀÚ ÇÒ ¶§, ÇöÀç µ¥ÀÌÅÍ¸¦ »ç¿ëÇÏ°í ÀÖ´Â ÇØ´ç ½º·¹µå¸¦ Á¦¿ÜÇÏ°í ³ª¸ÓÁö ½º·¹µåµéÀº µ¥ÀÌÅÍ¿¡ Á¢±Ù ÇÒ ¼ö ¾øµµ·Ï ¸·´Â °³³äÀÔ´Ï´Ù.
-		
+	public synchronized static HelloFactory getInstance() { //synchronized(ë™ê¸°í™”)-í•˜ë‚˜ì”©í•˜ë‚˜ì”© ì²˜ë¦¬í•˜ê³ ì í• ë•Œ/ ì—¬ëŸ¬ê°œì˜ ìŠ¤ë ˆë“œê°€ í•œê°œì˜ ìì›ì„ ì‚¬ìš©í•˜ê³ ìí• ë•Œ, í˜„ì¬ ë°ì´í„°ë¥¼ ì‚¬ìš©í•˜ê³  ìˆëŠ” í•´ë‹¹ ìŠ¤ë ˆë“œë¥¼ ì œì™¸í•˜ê³  ë‚˜ë¨¸ì§€ ìŠ¤ë ˆë“œë“¤ì€ ë°ì´í„°ì— ì ‘ê·¼í• ìˆ˜ ì—†ë„ë¡ ë§‰ëŠ” ê°œë…
 		if(helloFactory == null) {
 			helloFactory = new HelloFactory();
 		}
 		return helloFactory;
 	}
 	
-	//properties fileÀ» Ãß»óÈ­, Ä¸½¶È­ÇÑ java.util.Properties °´Ã¼ »ı¼º
+	// properties fileì„ ì¶”ìƒí™”, ìº¡ìŠí™”í•œ java.util.Properties ê°ì²´ ìƒì„±
 	public void setConfigResource(String configResource) {
 		FileInputStream fis = null;
 		try {
@@ -34,7 +33,7 @@ public class HelloFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (fis != null) {
+			if(fis!=null) {
 				try {
 					fis.close();
 				} catch (IOException e) {
@@ -43,44 +42,34 @@ public class HelloFactory {
 			}
 		}
 	}
-			
-		
-	// name¿¡ ÇØ´çÇÏ´Â °´Ã¼ »ı¼º
+	
+	// nameì— í•´ë‹¹í•˜ëŠ” ê°ì²´ ìƒì„±
 	private void newInstanceHello(String name) {
+		
 		String className = properties.getProperty(name).trim();
-		System.out.println("hello.properties¿¡¼­ ÃßÃâÇÑ className : " + className);
+		System.out.println("hello.propertiesì—ì„œ ì¶”ì¶œí•œ className : " + className);
 		
 		try {
 			Class cls = Class.forName(className);
 			Object obj = cls.newInstance();
 			if(obj instanceof Hello) {
-				this.hello = (Hello) obj; //Çüº¯È¯
+				this.hello = (Hello) obj;
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	
 	}
 	
-	// Hello °´Ã¼ »ı¼ºÇÏ´Â newInstanceHello() È£Ãâ ¹× Hello °´Ã¼¸¦ return
+	// Hello ê°ì²´ ìƒì„±í•˜ëŠ” newInstanceHello() í˜¸ì¶œ ë° Hello ê°ì²´ë¥¼ return
 	public Hello getBean(String name) {
 		this.newInstanceHello(name);
 		return hello;
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

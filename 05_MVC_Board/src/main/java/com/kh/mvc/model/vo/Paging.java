@@ -9,7 +9,7 @@ public class Paging {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private int num = 10; // ÇÑ ÆäÀÌÁöÀÇ º¸¿©Áú °³¼ö
+	private int num = 10; // í•œ íŽ˜ì´ì§€ì˜ ë³´ì—¬ì§ˆ ê°œìˆ˜
 	
 	private int total;
 	private Criteria cri;
@@ -19,7 +19,7 @@ public class Paging {
 		this.total = total;
 		
 		this.endPage = (int) Math.ceil((double)cri.getPage() / this.num) * this.num;
-		//             (Çüº¯È¯) ¿Ã¸² (¼Ò¼öÁ¡±îÁö³ª¿À°Ô)ÇöÀçÆäÀÌÁö / 10 ) * 10; --> ex)
+		//             (í˜•ë³€í™˜) ì˜¬ë¦¼ (ì†Œìˆ˜ì ê¹Œì§€ë‚˜ì˜¤ê²Œ)í˜„ìž¬íŽ˜ì´ì§€ / 10 ) * 10;
 		this.startPage = this.endPage - this.num + 1;
 		
 		int lastPage = (int) Math.ceil((double) total / cri.getAmount());
@@ -31,5 +31,7 @@ public class Paging {
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < lastPage;
 	}
+	
+	
 	
 }

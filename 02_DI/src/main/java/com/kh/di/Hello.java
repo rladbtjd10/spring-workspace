@@ -8,7 +8,7 @@ public class Hello {
 	private String message = "Hello~";
 	
 	public Hello() {
-		System.out.println(getClass().getName() + "...Instance Create.."); //getClass().getName()Ãâ·ÂÇÏ¸é class¸¦ Æ÷ÇÔÇÑ ÆĞÅ°Áö¸í º¸¿©ÁÜ
+		System.out.println(getClass().getName() + "...Instance Create.."); //getClass().getName()ì¶œë ¥í•˜ë©´ classë¥¼ í¬í•¨í•œ íŒ¨í‚¤ì§€ëª… ë³´ì—¬ì¤Œ
 	}
 	
 	public void printMessage() {

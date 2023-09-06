@@ -17,7 +17,7 @@ public class MemberController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcpe;
-
+	
 	@GetMapping("/all")
 	public void all() {}
 	
@@ -44,7 +44,7 @@ public class MemberController {
 		
 		System.out.println("before password : " + vo.getPassword());
 		
-		// BcryptPasswordEncoder¸¦ ÀÌ¿ëÇØ¼­ ¾ÏÈ£È­ Ã³¸®
+		// BcryptPasswordEncoderë¥¼ ì´ìš©í•´ì„œ ì•”í˜¸í™” ì²˜ë¦¬
 		String encodePassword = bcpe.encode(vo.getPassword());
 		System.out.println("after password : " + encodePassword);
 		
@@ -53,5 +53,8 @@ public class MemberController {
 		service.registerMember(vo);
 		return "redirect:/login";
 	}
-	
+
 }
+
+
+

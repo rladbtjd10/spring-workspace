@@ -7,13 +7,13 @@ import org.springframework.core.io.FileSystemResource;
 public class HelloTestApp3UsingSpring {
 
 	public static void main(String[] args) {
-		// 1. BeanFactory »ı¼º.. ÁÖ¹®¼­´Â °øÀå¿¡¼­ ¹Ì¸® ¹Ş¾Æ¼­ ÀĞ±â
-		// Bean Configuration File : ºó(Bean) ¼³Á¤¹®¼­
-		System.out.println("1. BeanFactory »ı¼º...");
+		// 1. BeanFactory ìƒì„±.. ì£¼ë¬¸ì„œëŠ” ê³µì¥ì—ì„œ ë¯¸ë¦¬ ë°›ì•„ì„œ ì½ê¸°
+		// Bean Configuration File : ë¹ˆ(Bean) ì„¤ì •ë¬¸ì„œ
+		System.out.println("1. BeanFactory ìƒì„±...");
 		BeanFactory factory = new XmlBeanFactory(new FileSystemResource("src/main/resources/config/hello.xml"));
 		
-		// 2. getBean()À¸·Î ºóÀ» ¹Ş¾Æ¿Í¼­ printMessage() È£Ãâ
-		System.out.println("2. getBean() Å¬¶óÀÌ¾ğÆ® È£Ãâ...");
+		// 2. getBean()ìœ¼ë¡œ ë¹ˆì„ ë°›ì•„ì™€ì„œ printMessage() í˜¸ì¶œ
+		System.out.println("2. getBean() í´ë¼ì´ì–¸íŠ¸ í˜¸ì¶œ...");
 		Hello hello = (Hello) factory.getBean("hello");
 		hello.printMessage();
 	}

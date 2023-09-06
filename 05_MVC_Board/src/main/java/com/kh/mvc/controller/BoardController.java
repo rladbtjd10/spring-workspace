@@ -32,13 +32,6 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-//	@RequestMapping("board/list")
-//	public ModelAndView list() {
-//		List<Board> list = service.selectAllBoard();
-//		return new ModelAndView("board/list", "list", list);
-//	}
-	
-	//@RequestMapping(value="/list", method=RequestMethod.GET)
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		List<Board> list = service.selectAllBoard(cri);
@@ -46,10 +39,6 @@ public class BoardController {
 		model.addAttribute("paging", new Paging(cri, service.getTotal()));
 	}
 	
-
-//	@PutMapping
-	
-//	@DeleteMapping
 	
 	@GetMapping("/insert")
 	public void insert() {
@@ -57,9 +46,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(Board board) throws IllegalStateException, IOException {
+	public String insert(Board board) throws IOException {
 		
-		// ���� ���ε� ��� 
+		// 파일 업로드 기능
 		fileUpload(board);
 		
 		service.insertBoard(board);
@@ -76,53 +65,52 @@ public class BoardController {
 		model.addAttribute("vo", service.selectBoard(no));
 	}
 	
-	public void fileUpload(Board board) throws IllegalStateException, IOException {
-		
+	public void fileUpload(Board board) throws IOException {
 		MultipartFile file = board.getUploadFile();
 		System.out.println("file : " + file);
 		
-		if(!file.isEmpty()) { // ���ε��� ������ �ִ� ���!
-							
-			// ������ ������ �ִ� ��� ����!
+		if(!file.isEmpty()) { // 업로드한 파일이 있는 경우!
+			
+			// 기존에 파일이 있는 경우 삭제!
 			if(board.getUrl()!=null) {
-				File delFile = new File(path + board.getUrl().replace("/upload/", "")); //���ϸ� ����
+				File delFile = new File(path + board.getUrl().replace("/upload/", ""));
 				delFile.delete();
+				 
 			}
 			
-			System.out.println("������ ������ : " + file.getSize());
-			System.out.println("���ε�� ���ϸ� : " + file.getOriginalFilename());
-			System.out.println("������ �Ķ���͸� : " + file.getName());
+			System.out.println("파일의 사이즈 : " + file.getSize());
+			System.out.println("업로드된 파일명 : " + file.getOriginalFilename());
+			System.out.println("파일의 파라미터명 : " + file.getName());
 			
 			
-			// �ߺ� ������ ���� UUID ����
+			
+			// 중복 방지를 위한 UUID 적용
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid.toString() + "_" + file.getOriginalFilename();
 			
 			File copyFile = new File(path + filename);
-			file.transferTo(copyFile); // ���ε��� ������ ������ path ��ġ�� ����
+			file.transferTo(copyFile); // 업로드한 파일이 지정한 path 위치로 저장
 			
-			// �����ͺ��̽��� ��� ����
+			// 데이터베이스에 경로 저장
 			board.setUrl("/upload/" + filename);
 		}
-		
 	}
 	
 	@PostMapping("/update")
-	public String update(Board board) throws IllegalStateException, IOException {
+	public String update(Board board) throws IOException {
 		
-		// ���� ���ε� ���
+		// 파일 업로드 기능 추가
 		fileUpload(board);
 		
 		service.updateBoard(board);
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/delete") 
 	public String delete(int no) {
 		Board board = service.selectBoard(no);
-		// ������ ������ �ִ� ��� ����!
 		if(board.getUrl()!=null) {
-			File delFile = new File(path + board.getUrl().replace("/upload/", "")); //���ϸ� ����
+			File delFile = new File(path + board.getUrl().replace("/upload/", ""));
 			delFile.delete();
 		}
 		service.deleteBoard(no);
@@ -136,5 +124,12 @@ public class BoardController {
 		return new ModelAndView("downloadView", map);
 	}
 
-
 }
+
+
+
+
+
+
+
+

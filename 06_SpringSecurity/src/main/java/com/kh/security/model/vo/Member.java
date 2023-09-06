@@ -9,17 +9,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
-@Data 
+@Data
 public class Member implements UserDetails {
 	
 	private String id;
 	private String password;
 	private String name;
 	private String address;
-	private String auth; //ÀÎÁõ
-	private int enabled; //»óÅÂ Ç¥½Ã±â, ÀÌÁø »óÅÂ¸¦ ³ªÅ¸³»´Â µ¥ »ç¿ëµÉ ¼ö ÀÖÀ½À» ½Ã»çÇÕ´Ï´Ù(¿¹: ºñÈ°¼ºÈ­µÈ °æ¿ì 0, È°¼ºÈ­µÈ °æ¿ì 1).
+	private String auth; //ì¸ì¦
+	private int enabled; //ìƒíƒœí‘œì‹œê¸°, ì´ì§„ìƒíƒœë¥¼ ë‚˜íƒ€ëƒ„(ì˜ˆ: ë¹„í™œì„±0, í™œì„±1)
 	
-	// getAuthorities : È¸¿øÀÇ auth(role) ¿ªÇÒ¿¡ ÇØ´çÇÏ´Â Á¤º¸ getter
+	// getAuthorities : íšŒì›ì˜ auth(role) ì •ë³´ getter
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -34,12 +34,12 @@ public class Member implements UserDetails {
 	}
 	
 	@Override
-	public boolean isAccountNonExpired() { //°èÁ¤°ú °ü·ÃµÈ°Å true
-		return true; 
+	public boolean isAccountNonExpired() { //ê³„ì •ê³¼ê´€ë ¨ëœê±°true
+		return true;
 	}
 	
 	@Override
-	public boolean isAccountNonLocked() { // ±ÇÇÑ °ü·ÃµÈ°Å true
+	public boolean isAccountNonLocked() { //ê¶Œí•œê³¼ ê´€ë ¨ëœê±°true
 		return true;
 	}
 	

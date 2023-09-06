@@ -6,14 +6,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Character {
-	
+
 	private String name;
 	private int level;
 	private Weapon weapon;
 	
 	public String quest(String questName) throws Exception {
-		System.out.println(questName + "Äù½ºÆ® ÁøÇà Áß..");
-		return questName + "Äù½ºÆ® ÁøÇà Áß..";
+		System.out.println(questName + "í€˜ìŠ¤íŠ¸ ì§„í–‰ ì¤‘..");
+		return questName + " í€˜ìŠ¤íŠ¸ ì§„í–‰ ì¤‘";
 	}
-
+	
 }

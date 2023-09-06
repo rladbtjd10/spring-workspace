@@ -19,7 +19,7 @@ public class Board {
 		private String writer;
 		private Date regdate;
 		
-		private MultipartFile uploadFile; //ÄÁÆ®·Ñ·¯¿¡¼­ ´Ù·ê¾Ö
-		private String url; //µ¥ÀÌÅÍº£ÀÌ½º ¶§¹®¿¡ Ãß°¡
+		private MultipartFile uploadFile; //ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë‹¤ë£°ì• 
+		private String url; //ë°ì´í„°ë² ì´ìŠ¤ë•Œë¬¸ì— ì¶”ê°€
 }
 

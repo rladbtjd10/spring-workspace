@@ -19,53 +19,51 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	// <°Ë»ö>
-	// ´Ü¼ø ÀÌµ¿
 	@RequestMapping("search")
 	public String search() {
-		return "search"; // -> sevlecontext¿¡ "/WEB-INF/views/"µŞºÎºĞ¿¡ search°¡ ºÙ¾î¼­ ±× °æ·Î·Î °¡Áü
+		return "search"; // sevlecontextì— "/WEB-INF/views/"ë’·ë¶€ë¶„ì— searchê°€ ë¶™ì–´ì„œ ê·¸ ê²½ë¡œë¡œ ê°€ì§
 	}
 	
 	@RequestMapping("find")
-	public String find(String keyword, Model model) {
-		// getParameter ºÎºĞÀÌ ÇÊ¿ä°¡ ¾øÀ½
-		// ¼­ºñ½º - ºñÁî´Ï½º ·ÎÁ÷ Ã³¸®!
-		//  --> list °ª! µ¥ÀÌÅÍ ¹ÙÀÎµù -> Model!
-		// model.addAllAttributes("list", list);
+	public String find(String keyword, Model model) { 
+		// getParameter ë¶€ë¶„ì´ í•„ìš”ê°€ ì—†ìŒ
+		// ì„œë¹„ìŠ¤ - ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ ì²˜ë¦¬!
+		//  --> list ê°’! ë°ì´í„° ë°”ì¸ë”© -> Model!
+		// model.addAttribute("list", list);
 		List<Member> list = service.findMember(keyword);
 		
 		if(list.size() > 0) {
 			model.addAttribute("list", list);
 			return "find_ok";
 		}
-		return "find_fail"; // "find_fail"
+		return "find_fail";
 	}
 	
-	// <È¸¿ø°¡ÀÔ>
-	// ÆäÀÌÁö ÀÌµ¿
-	@RequestMapping("register") 
+	// <íšŒì›ê°€ì…>
+	// í˜ì´ì§€ ì´ë™
+	@RequestMapping("register")
 	public String register() {
 		return "register";
 	}
 	
-	// ºñÁî´Ï½º ·ÎÁ÷ Ã³¸®
-	@RequestMapping("signUp") 
+	// ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ ì²˜ë¦¬
+	@RequestMapping("signUp")
 	public String signUp(Member member) {
-		//ºñÁî´Ï½º ·ÎÁ÷
-		// register.jsp¿¡¼­ name°ªÀÌ¶û ÇÊµå¸í ¸ÂÃß¶ó Çß´ø ÀÌÀ¯´Â getParameter
-		// ¾øÀÌ ±×³É Member·Î ¹ŞÀ» ¼ö ÀÖ¾î¼­
+		// ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ 
+		// register.jspì—ì„œ nameê°’ì´ë‘ í•„ë“œëª… ë§ì¶”ë¼ í–ˆë˜ ì´ìœ ëŠ” getParameter
+		// ì—†ì´ ê·¸ëƒ¥ Memberë¡œ ë°›ì„ ìˆ˜ ìˆì–´ì„œ
 		service.registerMember(member);
-		return "redirect:/"; //index.jsp·Î ³Ñ±æ¶§. view¹Û¿¡ À§Ä¡ÇßÀ»¶§
+		return "redirect:/"; //index.jspë¡œ ë„˜ê¸¸ë•Œ viewë°–ì— ìœ„ì¹˜í–ˆì„ë•Œ
 	}
 	
-	// login - ÆäÀÌÁö ÀÌµ¿
+	// login - í˜ì´ì§€ ì´ë™
 	@RequestMapping("login")
 	public String login() {
 		return "login";
 	}
 	
-	// signIn - ºñÁî´Ï½º ·ÎÁ÷ Æ÷ÇÔ
-	//   : ÆÄ¶ó¹ÌÅÍ °ª -> HttpServletRequest request
+	// signIn - ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ í¬í•¨
+	//   : íŒŒë¼ë¯¸í„° ê°’ -> HttpServletRequest request
 	// -> return "login_result"
 	@RequestMapping("signIn")
 	public String signIn(Member vo, HttpSession session) {
@@ -77,18 +75,17 @@ public class MemberController {
 		return "login_result";
 	}
 	
-	
-	// allMember - ºñÁö´Ï½º ·ÎÁ÷ Æ÷ÇÔ, µ¥ÀÌÅÍ¹ÙÀÎµù - Model
+	// allMember - ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ í¬í•¨, ë°ì´í„°ë°”ì¸ë”© - Model
 	// --> return "find_ok";
-	@RequestMapping("allMember") 
+	@RequestMapping("allMember")
 	public String allMember(Model model) {
 		List<Member> list = service.showAllMember();
 		model.addAttribute("list", list);
 		return "find_ok";
 	}
 	
-	// logout - ·Î±×¾Æ¿ô ±â´É!
-	@RequestMapping("logout") 
+	// logout - ë¡œê·¸ì•„ì›ƒ ê¸°ëŠ¥!
+	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		if(session.getAttribute("vo")!=null) {
 			session.invalidate();
@@ -96,14 +93,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	// update - ÆäÀÌÁö ÀÌµ¿
-	@RequestMapping("update") 
+	// update - í˜ì´ì§€ ì´ë™
+	@RequestMapping("update")
 	public String update() {
 		return "update";
 	}
 	
-	// updateMember - ºñÁö´Ï½º ·ÎÁ÷ Æ÷ÇÔ -> ÆÄ¶ó¹ÌÅÍ request ÇÊ¿ä
-	@RequestMapping("updateMember") 
+	// updateMember - ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ í¬í•¨ -> íŒŒë¼ë¯¸í„° request í•„ìš”
+	@RequestMapping("updateMember")
 	public String updateMember(Member vo, HttpSession session) {
 		service.updateMember(vo);
 		if(session.getAttribute("vo")!=null) {
@@ -113,19 +110,6 @@ public class MemberController {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

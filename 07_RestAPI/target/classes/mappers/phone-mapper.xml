@@ -2,29 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="phone">
 	
-	<insert id="insertPhone" parameterType="Phone">
+	<insert id="insert" parameterType="Phone">
 		INSERT INTO phone(num, model, price, vcode)
 		VALUES (#{num}, #{model}, #{price}, #{vcode})
 	</insert>
 	
+	<resultMap type="phone" id="phoneWithCompany">
+		<id column="num" property="num" />
+		<result column="model" property="model" />
+		<result column="price" property="price" />
+		<result column="vcode" property="vcode" />
+		<association property="company" javaType="company">
+			<id column="vcode" property="vcode" />
+			<result column="vendor" property="vendor" />
+		</association>
+	</resultMap>
+	
 	<!--  Dynamic Query : selectAll + selectOne (num) num를 입력하면 하나만 보이고 입력안하면 전체보이는거요--> 
-	<select id="selectAll" parameterType="String" resultType="Phone">
-		
+	<select id="select" parameterType="String" resultMap="phoneWithCompany">
+		SELECT num, model, price, vcode, vendor
+		FROM phone
+		JOIN company USING(vcode)
+		<if test="num!=null">
+			WHERE num=#{num}
+		</if>
 	</select>
 	
-	<delete id="deletePhone" >
-		DELETE
+	<delete id="delete" parameterType="String">
+		DELETE FROM phone
+		WHERE num=#{num}
 	</delete>
 	
-	<update id="updatePhone" parameterType="Phone">
+	<update id="update" parameterType="Phone">
 		UPDATE phone
 		SET model=#{model}, price=#{price}, vcode=#{vcode}
 		WHERE num=#{num}
 	</update>
 	
 	<!-- Dynamic Query : id와 pw 둘다 입력했을때랑 id만 입력햇을때 -->
-	<select id="selectUser">
-		SELECT * FROM 
+	<select id="selectUser" parameterType="userinfo" resultType="userinfo">
+		SELECT id, pw
+		FROM userinfo
+		WHERE id=#{id}
+		<if test="pw!=null">
+			AND pw=#{pw}
+		</if>
 	</select>
 	
 </mapper>

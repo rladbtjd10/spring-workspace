@@ -1,5 +1,8 @@
 package com.kh.api.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,35 +14,71 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.api.model.Phone;
+import com.kh.api.service.PhoneService;
 
 @RestController
 public class PhoneController {
 	
+	@Autowired
+	private PhoneService service;
+	
+	// http://localhost:8080/api/phone
 	@GetMapping("/phone")
 	public ResponseEntity select() {
-		// phone ÀüÃ¼ ¸®½ºÆ®
-		return new ResponseEntity("sample", HttpStatus.OK); //ResponseEntity-µ¥ÀÌÅÍ¿Í ÇÔ²² »óÅÂ(ex)200)¿Í °ü·ÃµÈ ÄÚµåµµ º¸³¾¼ö ÀÖÀ½
+		// phone ì „ì²´ë¦¬ìŠ¤íŠ¸
+		try {
+			List<Phone> list = service.select();
+			return new ResponseEntity(list, HttpStatus.OK); //ResponseEntity-ë°ì´í„°ì™€ í•¨ê»˜ ìƒíƒœ(ex)200)ì™€ ê´€ë ¨ëœ ì½”ë“œë„ ë³´ë‚¼ìˆ˜ ìˆìŒ
+		} catch(RuntimeException e) {
+			e.printStackTrace(); //ì˜¤ë¥˜ì˜ ì›ì¸ì„ ì•Œìˆ˜ ìˆê²Œí•˜ê¸° ìœ„í•´
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	// http://localhost:8080/api/phone/ZF01
+	@GetMapping("/phone/{num}")
+	public ResponseEntity select(@PathVariable String num) {
+		try {
+			Phone phone = service.select(num);
+			return new ResponseEntity(phone, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	// http://localhost:8080/api/phone
+	@PostMapping("/phone")
+	public ResponseEntity insert(@RequestBody Phone phone) {
+		try {
+			int result = service.insert(phone);
+			return new ResponseEntity(result, HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
 		
 	}
 	
-	@GetMapping("/phone/{num}")
-	public ResponseEntity select(@PathVariable String num) {
-		return new ResponseEntity("error", HttpStatus.NO_CONTENT);
-	}
-	
-	@PostMapping("/phone")
-	public ResponseEntity insert(@RequestBody Phone phone) {
-		return new ResponseEntity(HttpStatus.NOT_FOUND);
-	}
-	
+	// http://localhost:8080/api/phone
 	@PutMapping("/phone")
 	public ResponseEntity update(@RequestBody Phone phone) {
-		return new ResponseEntity(HttpStatus.BAD_REQUEST); //BAD_REQUEST-Àß¸ø¿äÃ»À»º¸³Â´Ù
+		try {
+			service.update(phone);
+			return new ResponseEntity(HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
 	}
 	
+	// http://localhost:8080/api/phone/ZF02
 	@DeleteMapping("/phone/{num}")
 	public ResponseEntity delete(@PathVariable String num) {
-		return new ResponseEntity(HttpStatus.OK);
+		try {
+			service.delete(num);
+			return new ResponseEntity(HttpStatus.OK);
+		} catch(RuntimeException e) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
 	}
 
+	
 }

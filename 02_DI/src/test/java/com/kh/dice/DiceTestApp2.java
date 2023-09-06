@@ -9,26 +9,27 @@ import org.springframework.core.io.FileSystemResource;
 public class DiceTestApp2 {
 
 	public static void main(String[] args) {
-		//BeanFactory factory = new XmlBeanFactory(new FileSystemResource("src/main/resources/config/dice.xml")); //°øÀå¿ªÇÒ
+		
+		//BeanFactory factory = new XmlBeanFactory(new FileSystemResource("src/main/resources/config/dice.xml"));
 		ApplicationContext factory = new ClassPathXmlApplicationContext("/config/dice.xml");
 		
 		Player player1 = (Player) factory.getBean("player1");
 		player1.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player1.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player1.getTotalValue());
+		System.out.println("===============");
 		
 		Player player2 = (Player) factory.getBean("player2");
 		player2.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player2.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player2.getTotalValue());
+		System.out.println("===============");
 		
 		Player player3 = (Player) factory.getBean("player3");
 		player3.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player3.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player3.getTotalValue());
+		System.out.println("===============");
 	}
 
 }

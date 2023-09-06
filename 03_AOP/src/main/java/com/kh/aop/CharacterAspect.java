@@ -8,59 +8,53 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-// ÀÏ¹İÀûÀÎ ÀÚ¹Ù Å¬·¡½º°¡ ¾Æ´Ï¶ó ¾Ö½ºÆÑÆ®ÀÓÀ» ³ªÅ¸³½´Ù.
+// ì¼ë°˜ì ì¸ ìë°” í´ë˜ìŠ¤ê°€ ì•„ë‹ˆë¼ ì• ìŠ¤íŒ©íŠ¸ì„ì„ ë‚˜íƒ€ë‚¸ë‹¤.
 @Aspect
 public class CharacterAspect {
 	
 	/*
-	 * * Æ÷ÀÎÆ®ÄÆ Ç¥Çö½Ä
-	 *  execution([¼ö½Ä¾î] ¸®ÅÏÅ¸ÀÔ [Å¬·¡½ºÀÌ¸§].ÀÌ¸§(ÆÄ¶ó¹ÌÅÍ))
-	 *  - ¼ö½Ä¾î : public, private µî ¼ö½Ä¾î¸¦ ¸í½Ã (»ı·« °¡´É)
-	 *  - ¸®ÅÏÅ¸ÀÔ : ¸®ÅÏ Å¸ÀÔÀ» ¸í½Ã
-	 *  - Å¬·¡½º ÀÌ¸§ ¹× ÀÌ¸§ : Å¬·¡½º ÀÌ¸§°ú ¸Ş¼­µå ÀÌ¸§À» ¸í½Ã (Å¬·¡½º ÀÌ¸§Àº Ç®ÆĞÅ°Áö¸íÀ¸·Î ¸í½Ã, »ı·« °¡´É)
-	 *  - ÆÄ¶ó¹ÌÅÍ : ¸Ş¼­µåÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¸í½Ã 
-	 *  - " * " : ¸ğµç °ªÀ» Ç¥ÇöÇÑ´Ù
-	 *  - " .. " : 0°³ ÀÌ»óÀ» ÀÇ¹ÌÇÑ´Ù
+	 * * í¬ì¸íŠ¸ì»· í‘œí˜„ì‹
+	 *  execution([ìˆ˜ì‹ì–´] ë¦¬í„´íƒ€ì… [í´ë˜ìŠ¤ì´ë¦„].ì´ë¦„(íŒŒë¼ë¯¸í„°))
+	 *  - ìˆ˜ì‹ì–´ : public, private ë“± ìˆ˜ì‹ì–´ë¥¼ ëª…ì‹œ (ìƒëµ ê°€ëŠ¥)
+	 *  - ë¦¬í„´íƒ€ì… : ë¦¬í„´ íƒ€ì…ì„ ëª…ì‹œ
+	 *  - í´ë˜ìŠ¤ ì´ë¦„ ë° ì´ë¦„ : í´ë˜ìŠ¤ ì´ë¦„ê³¼ ë©”ì„œë“œ ì´ë¦„ì„ ëª…ì‹œ
+	 *                        (í´ë˜ìŠ¤ ì´ë¦„ì€ í’€íŒ¨í‚¤ì§€ëª…ìœ¼ë¡œ ëª…ì‹œ, ìƒëµ ê°€ëŠ¥)
+	 *  - íŒŒë¼ë¯¸í„° : ë©”ì„œë“œì˜ íŒŒë¼ë¯¸í„°ë¥¼ ëª…ì‹œ
+	 *  - " * " : ëª¨ë“  ê°’ì„ í‘œí˜„í•œë‹¤
+	 *  - " .. " : 0ê°œ ì´ìƒì„ ì˜ë¯¸í•œë‹¤                      
 	 */
 	@Pointcut("execution(* com.kh.character.Character.quest(..))")
 	public void questPointcut() {}
-			
 	
 	@Before(value="questPointcut()")
 	public void beforeQuest(JoinPoint jp) {
-		// Äù½ºÆ®¸¦ ¼öÇàÇÏ±â Àü¿¡ ÇÊ¿äÇÑ ºÎ°¡ ÀÛ¾÷µé ¼öÇà
+		// í€˜ìŠ¤íŠ¸ë¥¼ ìˆ˜í–‰í•˜ê¸° ì „ì— í•„ìš”í•œ ë¶€ê°€ ì‘ì—…ë“¤ ìˆ˜í–‰
 		String questName = (String) jp.getArgs()[0];
-		System.out.println(questName + "Äù½ºÆ® ÁØºñ Áß..");
+		System.out.println(questName + " í€˜ìŠ¤íŠ¸ ì¤€ë¹„ ì¤‘..");
 	}
 	
-	@After("execution(* com.kh.character.Character.quest(..))")
+	@After(value="questPointcut()")
 	public void afterQuest() {
-		System.out.println("Äù½ºÆ® ¼öÇà ¿Ï·á..");
+		System.out.println("í€˜ìŠ¤íŠ¸ ìˆ˜í–‰ ì™„ë£Œ..");
 	}
 	
 	@Around("execution(* com.kh.character.Weapon.attack())")
 	public String attackAdvice(ProceedingJoinPoint jp) {
 		String result = null;
 		
-		System.out.println("°ø°İÀ» ÁØºñÁß ÀÔ´Ï´Ù..");
+		System.out.println("ê³µê²©ì„ ì¤€ë¹„ì¤‘ ì…ë‹ˆë‹¤..");
 		
 		try {
 			result = (String) jp.proceed();
 			System.out.println(result);
-			System.out.println("°ø°İÀ» ¼º°øÇß½À´Ï´Ù..");
+			System.out.println("ê³µê²©ì„ ì„±ê³µí–ˆìŠµë‹ˆë‹¤..");
 		} catch (Throwable e) {
-			System.out.println("¿¡·¯°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù..");
+			System.out.println("ì—ëŸ¬ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤..");
 			e.printStackTrace();
 		}
 		
 		return result;
 	}
-	/*
-	@Around("execution(* com.kh.character.Character.quest(..))")
-	public String questAdvice(ProceedingJoinPoint jp) {
-		String result = null;
-		return result;
-	}
-	*/
 
 }
+

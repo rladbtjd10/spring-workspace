@@ -3,21 +3,21 @@ package com.kh.mvc.model.vo;
 import lombok.Getter;
 import lombok.Setter;
 
-// page¿Í amount °ªÀ» °°ÀÌ Àü´ŞÇÏ´Â ¿ëµµ
+// pageì™€ amount ê°’ì„ ê°™ì´ ì „ë‹¬í•˜ëŠ” ìš©ë„
 @Setter
 @Getter
 public class Criteria {
-	
-	private int page; // ÆäÀÌÁö ¹øÈ£
-	private int amount; // ÇÑ ÆäÀÌÁö ´ç ¸î °³ÀÇ µ¥ÀÌÅÍ¸¦ º¸¿©ÁÙÁö
+
+	private int page; // í˜ì´ì§€ ë²ˆí˜¸
+	private int amount; // í•œ í˜ì´ì§€ ë‹¹ ëª‡ ê°œì˜ ë°ì´í„°ë¥¼ ë³´ì—¬ì¤„ì§€
 	
 	public Criteria() {
-		this(1, 15); // ±âº»°ª ÁöÁ¤ÇØ¼­ Ã³¸®
+		this(1, 15); // ê¸°ë³¸ê°’ ì§€ì •í•´ì„œ ì²˜ë¦¬
 	}
 	
 	public Criteria(int page, int amount) {
 		this.page = page;
 		this.amount = amount;
 	}
-
+	
 }

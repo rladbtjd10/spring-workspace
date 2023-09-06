@@ -1,4 +1,5 @@
 package com.kh.mvc;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
@@ -11,13 +12,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.kh.mvc.model.vo.Board;
 import com.kh.mvc.model.vo.Criteria;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class MyBatisUnitTest {
 	
-	public SqlSession getSession() {		
+	public SqlSession getSession() {
 		try {
 			
 			Reader r = Resources.getResourceAsReader("mybatis-config.xml");
@@ -27,9 +30,8 @@ public class MyBatisUnitTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-	
+		
 	}
 	
 	@Test
@@ -37,21 +39,22 @@ public class MyBatisUnitTest {
 		SqlSession session = getSession();
 		
 		Board board = new Board();
-		board.setTitle("Å×½ºÆ® 01");
-		board.setContent("Å×½ºÆ® °Ô½Ã¹° ³»¿ë 01");
-		board.setWriter("»ç¿ëÀÚ1");
+		board.setTitle("í…ŒìŠ¤íŠ¸ 01");
+		board.setContent("í…ŒìŠ¤íŠ¸ ê²Œì‹œë¬¼ ë‚´ìš© 01");
+		board.setWriter("ì‚¬ìš©ìž1");
 		
 		System.out.println("db before :: " + board.getNo());
 		
 		int result = session.insert("board.insert", board);
 		
 		if(result > 0) {
-			System.out.println(result + "°³ °Ô½Ã±Û Ãß°¡!");
+			System.out.println(result + "ê°œ ê²Œì‹œê¸€ ì¶”ê°€!");
 			session.commit();
 		}
+		
 		System.out.println("db after :: " + board.getNo());
 		
-		System.out.println("=====================================");
+		System.out.println("===========================");
 	}
 	
 	@Test
@@ -65,7 +68,7 @@ public class MyBatisUnitTest {
 		List<Board> list = session.selectList("board.selectAll", cri);
 		System.out.println(list);
 		System.out.println(list.size());
-		System.out.println("=====================================");
+		System.out.println("==========================");
 	}
 	
 	@Test
@@ -73,7 +76,7 @@ public class MyBatisUnitTest {
 		SqlSession session = getSession();
 		Board board = session.selectOne("board.select", 10);
 		System.out.println(board);
-		System.out.println("=====================================");
+		System.out.println("===========================");
 	}
 	
 	@Test
@@ -81,11 +84,11 @@ public class MyBatisUnitTest {
 		SqlSession session = getSession();
 		Board board = new Board();
 		board.setNo(10);
-		board.setTitle("Å×½ºÆ® ¼öÁ¤");
-		board.setContent("Å×½ºÆ®¿¡¼­ ¼öÁ¤ Áß");
+		board.setTitle("í…ŒìŠ¤íŠ¸ ìˆ˜ì •");
+		board.setContent("í…ŒìŠ¤íŠ¸ì—ì„œ ìˆ˜ì • ì¤‘");
 		int result = session.update("board.update", board);
 		if(result > 0) {
-			System.out.println(result + "°³ °Ô½Ã±Û ¼öÁ¤!");
+			System.out.println(result + "ê°œ ê²Œì‹œê¸€ ìˆ˜ì •!");
 			session.commit();
 		}
 	}
@@ -95,12 +98,16 @@ public class MyBatisUnitTest {
 		SqlSession session = getSession();
 		int result = session.delete("board.delete", 10);
 		if(result > 0) {
-			System.out.println(result + "°³ °Ô½Ã±Û »èÁ¦!");
+			System.out.println(result + "ê°œ ê²Œì‹œê¸€ ì‚­ì œ!");
 			session.commit();
 		}
 	}
-	
+
 }
+
+
+
+
 
 
 

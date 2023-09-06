@@ -7,10 +7,10 @@ public class Bow extends Weapon {
 	public Bow(String name) {
 		super(name);
 	}
-	
+
 	@Override
 	public String attack() throws Exception {
-		return "È°À» ½ğ´Ù.";
+		return "í™œì„ ìœë‹¤.";
 	}
 
 }

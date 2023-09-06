@@ -10,8 +10,7 @@ public class Sword extends Weapon {
 
 	@Override
 	public String attack() throws Exception {
-		return "°ËÀ» ÈÖµÎ¸¥´Ù.";
+		return "ê²€ì„ íœ˜ë‘ë¥¸ë‹¤.";
 	}
-	
 
 }

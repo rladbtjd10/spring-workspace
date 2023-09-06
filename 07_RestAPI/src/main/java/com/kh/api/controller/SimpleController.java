@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.api.model.Person;
 
-@RestController //ÁÖ¼Ò¸¦ ¾î¶»°Ô ¼³°è ÇÏ´À³Ä°¡ Áß¿ä
+@RestController //ì£¼ì†Œë¥¼ ì–´ë–»ê²Œ ì„¤ê³„í•˜ëŠëƒê°€ ì¤‘ìš”
 @RequestMapping("/simple")
 public class SimpleController {
 	
 	/*
 	 * REST (Representational State Transfer)
-	 * - ÇÏ³ªÀÇ URI´Â ÇÏ³ªÀÇ °íÀ¯ÇÑ ¸®¼Ò½º(Resource)¸¦ ´ëÇ¥ÇÏµµ·Ï ¼³°èÇÏ´Â Àü¼Û¹æ½Ä
-	 * - °¡Àå ±â¾ïÇØ¾ß ÇÒ Á¡Àº ¼­¹ö¿¡¼­ µ¥ÀÌÅÍ ÀÚÃ¼¸¦ Àü¼ÛÇÏ´Â ¹æ½ÄÀ¸·Î Ã³¸®ÇÑ´Ù´Â °Í!
+	 * - í•˜ë‚˜ì˜ URIëŠ” í•˜ë‚˜ì˜ ê³ ìœ í•œ ë¦¬ì†ŒìŠ¤(Resource)ë¥¼ ëŒ€í‘œí•˜ë„ë¡ ì„¤ê³„í•˜ëŠ” ì „ì†¡ë°©ì‹
+	 * - ê°€ì¥ ê¸°ì–µí•´ì•¼ í•  ì ì€ ì„œë²„ì—ì„œ ë°ì´í„° ìì²´ë¥¼ ì „ì†¡í•˜ëŠ” ë°©ì‹ìœ¼ë¡œ ì²˜ë¦¬í•œë‹¤ëŠ” ê²ƒ!
 	 * 
 	 * API (Application Programming Interface)
-	 * - ÄÄÇ»ÅÍ¿Í ÄÄÇ»ÅÍ »çÀÌÀÇ »óÈ£ÀÛ¿ëÀ» À§ÇÑ ¿¬°á ¹æ½Ä
+	 * - ì»´í“¨í„°ì™€ ì»´í“¨í„° ì‚¬ì´ì˜ ìƒí˜¸ì‘ìš©ì„ ìœ„í•œ ì—°ê²° ë°©ì‹
 	 * 
-	 * @RestController 
-	 * - Controller°¡ REST ¹æ½ÄÀ» Ã³¸®ÇÏ±â À§ÇÑ °ÍÀÓÀ» ¸í½Ã
-	 * - ¸Ş¼­µåÀÇ ¸®ÅÏ Å¸ÀÔÀ¸·Î »ç¿ëÀÚ°¡ Á¤ÀÇÇÑ Å¬·¡½º Å¸ÀÔµµ »ç¿ëÇÒ ¼ö ÀÕ°í,
-	 * 	 ÀÌ ¿Ü¿¡µµ ¿©·¯ Å¸ÀÔÀ¸·Î º¸³»´Âµ¥ ÀÌ¸¦ JSONÀÌ³ª XML·Î ÀÚµ¿ Ã³¸®
-	 * 
+	 * @RestControlle
+	 * - Controllerê°€ REST ë°©ì‹ì„ ì²˜ë¦¬í•˜ê¸° ìœ„í•œ ê²ƒì„ì„ ëª…ì‹œ
+	 * - ë©”ì„œë“œì˜ ë¦¬í„´ íƒ€ì…ìœ¼ë¡œ ì‚¬ìš©ìê°€ ì •ì˜í•œ í´ë˜ìŠ¤ íƒ€ì…ë„ ì‚¬ìš©í•  ìˆ˜ ìˆê³ ,
+	 *   ì´ ì™¸ì—ë„ ì—¬ëŸ¬ íƒ€ì…ìœ¼ë¡œ ë³´ë‚´ëŠ”ë° ì´ë¥¼ JSONì´ë‚˜ XMLë¡œ ìë™ ì²˜ë¦¬
+	 *   
 	 * JSON (JavaScript Object Notation)
-	 * - µ¥ÀÌÅÍ¸¦ { }·Î ¹­¾î¼­ Å°¿Í °ªÀ¸·Î ±¸¼ºÇÏ´Â µ¥ÀÌÅÍ Æ÷¸Ë
-	 */
+	 * - ë°ì´í„°ë¥¼ { }ë¡œ ë¬¶ì–´ì„œ í‚¤ì™€ ê°’ìœ¼ë¡œ êµ¬ì„±í•˜ëŠ” ë°ì´í„° í¬ë§·
+	 * */
 
 	// http://localhost:8080/api/simple/hello
 	@GetMapping("/hello")
@@ -40,7 +40,7 @@ public class SimpleController {
 	
 	@GetMapping("/greet")
 	public Person sayGreet() {
-		Person p = new Person("±è°æ¹Ì", "Áı¿¡°¡°íÆÄ..");
+		Person p = new Person("ê¹€ë¯¸ê²½", "ì•„ì§ë„ í™”ìš”ì¼ì´ë¼ë‹ˆ..");
 		return p;
 	}
 	
@@ -49,8 +49,8 @@ public class SimpleController {
 		List<Person> list = new ArrayList();
 		for(int i=0; i<5; i++) {
 			Person p = new Person();
-			p.setName("±İ¿äÀÏ" + i);
-			p.setMassage("¾ÆÁ÷ ¾Æ´Ô" + i);
+			p.setName("ê¸ˆìš”ì¼ " + i);
+			p.setMassage("ì•„ì§ ì•„ë‹˜ " + i);
 			list.add(p);
 		}
 		return list;
@@ -59,7 +59,7 @@ public class SimpleController {
 	@GetMapping("/sendGreet")
 	public Map<Integer, Person> sendGreet() {
 		Map<Integer, Person> map = new HashMap();
-		map.put(1, new Person("±è°æ¹Ì", "¾ğ´É ³¡³µÀ¸¸é..!"));
+		map.put(1, new Person("ê¹€ë¯¸ê²½", "ì •ì‹ ì°¨ë ¤!!"));
 		return map;
 	}
 	

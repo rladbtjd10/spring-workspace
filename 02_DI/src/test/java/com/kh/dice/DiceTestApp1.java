@@ -5,25 +5,31 @@ import com.kh.dice.impl.DiceBImpl;
 import com.kh.dice.impl.DiceCImpl;
 
 public class DiceTestApp1 {
-	
+
 	public static void main(String[] args) {
 		Player player1 = new Player(new DiceAImpl());
 		player1.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player1.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player1.getTotalValue());
+		System.out.println("===============");
 		
 		Player player2 = new Player(new DiceBImpl());
 		player2.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player2.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player2.getTotalValue());
+		System.out.println("===============");
 		
 		Player player3 = new Player(new DiceCImpl());
 		player3.playDice(3);
-		System.out.println("=====================");
-		System.out.println("¼±ÅÃµÈ ÁÖ»çÀ§ ¼öÀÇ ÅëÇÕÀº : " + player3.getTotalValue());
-		System.out.println("=====================");
+		System.out.println("===============");
+		System.out.println("ì„ íƒëœ ì£¼ì‚¬ìœ„ ìˆ˜ì˜ í†µí•©ì€ : " + player3.getTotalValue());
+		System.out.println("===============");
 	}
 
 }
+
+
+
+
+
+

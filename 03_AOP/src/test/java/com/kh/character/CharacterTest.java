@@ -26,13 +26,14 @@ public class CharacterTest {
 	
 	@Test
 	void questTest() throws Exception {
-		assertThat(character.quest("ÀÏ½ÃÁ¡°Ë")).contains("ÀÏ½ÃÁ¡°Ë");
+		assertThat(character.quest("ì¼ì‹œì ê²€")).contains("ì¼ì‹œì ê²€");
 	}
-		
+	
 	@Test
 	void attackTest() throws Exception {
 		assertThat(character.getWeapon().attack()).isNotNull();
 	}
 
-
 }
+
+

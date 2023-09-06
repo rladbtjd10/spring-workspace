@@ -4,21 +4,22 @@ public class HelloTestApp2 {
 
 	public static void main(String[] args) {
 		
-		// 1. »ç¿ëÇÒ Bean Á¤º¸¸¦ °®´Â hello.properties¸¦ parsing,
-		//     Bean °´Ã¼¸¦ »ı¼ºÇÒ HelloFactory °´Ã¼ »ı¼º
+		// 1. ì‚¬ìš©í•  Bean ì •ë³´ë¥¼ ê°–ëŠ” hello.propertiesë¥¼ parsing,
+		//    Bean ê°ì²´ë¥¼ ìƒì„±í•  HelloFactory ê°ì²´ ìƒì„±
 		HelloFactory helloFactory = HelloFactory.getInstance();
 		
-		// 2. helloFactory °´Ã¼·Î parsing ÇÒ resource Àü´Ş
+		// 2. helloFactory ê°ì²´ë¡œ parsing í•  resource ì „ë‹¬
 		helloFactory.setConfigResource("./src/main/resources/config/hello.properties");
 		
-		// 3. helloFactory °´Ã¼·ÎºÎÅÍ instance.one ÀÌ¸§À» °®´Â Hello °´Ã¼¸¦ return -ÄáÇÏ³ª¸¦ °¡Áö°í ¿Â´Ù¶ó°í »ı°¢
+		// 3. helloFactory ê°ì²´ë¡œë¶€í„° instance.one ì´ë¦„ì„ ê°–ëŠ” Hello ê°ì²´ ìš”ì²­
 		Hello hello = helloFactory.getBean("instance.one");
 		
-		// 4. printMessage() È£Ãâ
+		// 4. printMessage() í˜¸ì¶œ
 		hello.printMessage();
 		
-		
-
 	}
 
 }
+
+
+

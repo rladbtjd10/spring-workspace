@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
-public class DownloadView extends AbstractView{
+public class DownloadView extends AbstractView {
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
@@ -20,25 +20,29 @@ public class DownloadView extends AbstractView{
 		String path = (String) model.get("path");
 		String fileName = request.getParameter("filename");
 		
-		// ¾÷·Îµå °æ·Î°¡ ÀúÀåµÈ ÆÄÀÏ °´Ã¼
+		// ì—…ë¡œë“œ ê²½ë¡œê°€ ì €ì¥ëœ íŒŒì¼ ê°ì²´
 		File file = new File(path + fileName);
 		
-		// ÆÄÀÏ ´Ù¿î·Îµå
+		// íŒŒì¼ ë‹¤ìš´ë¡œë“œ
 		response.setContentType(this.getContentType());
-		response.setContentLength((int)file.length()); // ÆÄÀÏ Å©±â ¼³Á¤
+		response.setContentLength((int)file.length()); // íŒŒì¼ í¬ê¸° ì„¤ì •
 		
-		// ´Ù¿î·Îµå ÆÄÀÏ¿¡ ´ëÇÑ ¼³Á¤
+		// ë‹¤ìš´ë¡œë“œ íŒŒì¼ì— ëŒ€í•œ ì„¤ì •
 		response.setHeader("Content-Disposition", "attachment; fileName=" + new String(file.getName().getBytes("UTF-8"), "8859_1"));
 		
-		// µ¥ÀÌÅÍ ÀÎÄÚµùÀÌ ¹ÙÀÌ³Ê¸® ÆÄÀÏÀÓÀ» ¸í½Ã
+		// ë°ì´í„° ì¸ì½”ë”©ì´ ë°”ì´ë„ˆë¦¬ íŒŒì¼ì„ì„ ëª…ì‹œ
 		response.setHeader("Content-Transfer-encoding", "binary");
 		
-		// ½ÇÁ¦ ¾÷·Îµå ÆÄÀÏÀ» inputStreamÀ¸·Î ÀĞ¾î¼­
-		// response¿¡ ¿¬°áµÈ outputStreamÀ¸·Î Àü¼ÛÇÏ°Ú´Ù
+		// ì‹¤ì œ ì—…ë¡œë“œ íŒŒì¼ì„ inputStreamìœ¼ë¡œ ì½ì–´ì„œ
+		// responseì— ì—°ê²°ëœ outputStreamìœ¼ë¡œ ì „ì†¡í•˜ê² ë‹¤
 		OutputStream os = response.getOutputStream();
 		FileInputStream fis = new FileInputStream(file);
-		FileCopyUtils.copy(fis, os); 
+		FileCopyUtils.copy(fis, os);
 		
 	}
-	
+
 }
+
+
+
+

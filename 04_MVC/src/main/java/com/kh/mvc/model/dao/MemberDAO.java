@@ -10,8 +10,8 @@ import com.kh.mvc.model.vo.Member;
 
 @Repository
 public class MemberDAO {
-	
-	@Autowired //getsession Çß´ø°Å¶û °°Àº°Å
+
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	public int registerMember(Member vo) {
@@ -20,12 +20,10 @@ public class MemberDAO {
 	
 	/*
 	 * showAllMember
-	 * findMember -> ÆÄ¶ó¹ÌÅÍ : String keyword, return : List<Member>
-	 * login -> ÆÄ¶ó¹ÌÅÍ : Member vo
-	 * updateMember -> ÆÄ¶ó¹ÌÅÍ : Member vo
-	 * 
-	 */
-	
+	 * findMember -> íŒŒë¼ë¯¸í„° : String keyword, return : List<Member>
+	 * login -> íŒŒë¼ë¯¸í„° : Member vo
+	 * updateMember -> íŒŒë¼ë¯¸í„° : Member vo
+	 * */
 	public List<Member> showAllMember() {
 		return sqlSession.selectList("memberMapper.showAllMember");
 	}
@@ -41,5 +39,11 @@ public class MemberDAO {
 	public int updateMember(Member vo) {
 		return sqlSession.update("memberMapper.updateMember", vo);
 	}
-
+	
+	
+	
+	
 }
+
+
+

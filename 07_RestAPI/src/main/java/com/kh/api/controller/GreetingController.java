@@ -9,20 +9,20 @@ import com.kh.api.model.Greeting;
 @RestController
 public class GreetingController {
 	
-	// http://localhost:8080/api/greet --> selectList -get¹æ½ÄÀÌÀÚ µü ¶³¾îÁ³À»¶§
+	// http://localhost:8080/api/greet --> selectList -getë°©ì‹ì´ì ë”± ë–¨ì–´ì¡Œì„ë•Œ
 	@GetMapping("/greet")
 	public Greeting sayGreet() {
 		return new Greeting(314L, "Restful API");
 	}
 	
 	// http://localhost:8080/board/view?no=23 (x)
-	// --> http://localhost:8080/board/23 --> selectOne -url°æ·Î¿¡ Æ÷ÇÔÀ» ½ÃÅ°´Â Çü½ÄÀ¸·Î
+	// --> http://localhost:8080/board/23 --> selectOne -urlê²½ë¡œì— í¬í•¨ì„ ì‹œí‚¤ëŠ” í˜•ì‹ìœ¼ë¡œ
 	@GetMapping("/greet/{id}")
-	public String showSample(@PathVariable int id) { // PathVariable : URL °æ·ÎÀÇ ÀÏºÎ¸¦ ÆÄ¶ó¹ÌÅÍ·Î »ç¿ëÇÒ ¶§
+	public String showSample(@PathVariable int id) { // PathVariable : URL ê²½ë¡œì˜ ì¼ë¶€ë¥¼ íŒŒë¼ë¯¸í„°ë¡œ ì‚¬ìš©í•  ë•Œ
 		return "Hello REST API case number.." + id;
 	}
 	
-	// http://localhost:8080/search?keyword=Å°¿öµå
+	// http://localhost:8080/search?keyword=í‚¤ì›Œë“œ
 	@GetMapping("/greet2")
 	public Greeting sayGreet2(String content) {
 		return new Greeting(500L, content);

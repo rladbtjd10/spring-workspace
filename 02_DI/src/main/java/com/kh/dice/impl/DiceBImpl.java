@@ -9,7 +9,7 @@ public class DiceBImpl implements Dice {
 	private int value;
 	
 	public DiceBImpl() {
-		System.out.println(getClass().getName() + "»ı¼ºÀÚ..");
+		System.out.println(getClass().getName() + "ìƒì„±ì..");
 	}
 
 	@Override

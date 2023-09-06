@@ -23,7 +23,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 			System.out.println("auth : " + auth);
 			roleList.add(auth.getAuthority());
 		});
-		//authenticationÀÎÁõ°ú °ü·ÃµÈ Á¤º¸µéÀ» °¡Áö°í ÀÖÀ½
+		//authenticationì¸ì¦ê³¼ ê´€ë ¨ëœ ì •ë³´ë“¤ì„ ê°€ì§€ê³  ìˆìŒ
 		
 		if(roleList.contains("ROLE_MEMBER")) {
 			response.sendRedirect("/member");

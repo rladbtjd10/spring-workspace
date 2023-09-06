@@ -4,26 +4,35 @@ import lombok.Data;
 
 @Data
 public class Player {
-	
+
 	private Dice dice;
 	private int totalValue;
+	
+	public Player() {}
 	
 	public Player(Dice dice) {
 		this.dice = dice;
 	}
 	
-	//count ¸¸Å­ ÁÖ»çÀ§¸¦ ±¼·Á¼­ ÇÕÀ» ¸Å±â´Â ¸Þ¼­µå
+	// count ë§Œí¼ ì£¼ì‚¬ìœ„ë¥¼ êµ´ë ¤ì„œ í•©ì„ ë§¤ê¸°ëŠ” ë©”ì„œë“œ
 	public void playDice(int count) {
 		System.out.println("==>" + getClass().getName() + ".playDice() start~");
 		
-		for(int i=0; i<count; i++) {
+		for(int i = 0; i < count; i++) {
 			dice.selectedNumber();
 			
-			System.out.println("[" + dice.getClass().getName() + "] ÀÇ ¼±ÅÃµÈ ¼ö : " + dice.getValue());
+			System.out.println("[" + dice.getClass().getName() 
+										+ "] ì˜ ì„ íƒëœ ìˆ˜ : " + dice.getValue());
 			totalValue += dice.getValue();
 		}
 		
-		System.out.println("==>" + getClass().getName() + ".palyDice() end...");
+		System.out.println("==>" + getClass().getName() + ".playDice() end...");
 	}
 	
 }
+
+
+
+
+
+

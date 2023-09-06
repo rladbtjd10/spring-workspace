@@ -12,47 +12,37 @@ import com.kh.api.model.UserInfo;
 @Repository
 public class PhoneDAOImpl implements PhoneDAO {
 	
-	private final SqlSession sqlSession;
-	
 	@Autowired
-    public PhoneDAOImpl(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
-    }
+	private SqlSession session;
 
 	@Override
 	public int insert(Phone phone) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.insert("phone.insert", phone);
 	}
 
 	@Override
 	public int update(Phone phone) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.update("phone.update", phone);
 	}
 
 	@Override
 	public int delete(String num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.delete("phone.delete", num);
 	}
 
 	@Override
 	public Phone select(String num) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("phone.select", num);
 	}
 
 	@Override
 	public List<Phone> select() {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList("phone.select", null);
 	}
 
 	@Override
 	public UserInfo select(UserInfo user) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne("phone.selectUser", user);
 	}
 
 

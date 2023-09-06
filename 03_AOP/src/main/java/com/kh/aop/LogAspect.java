@@ -33,14 +33,14 @@ public class LogAspect {
 		log.info("exception : " + exception);
 	}
 	
-	@Around("execution(* com.kh.service.SampleService*.*(..))") //전과 후에 대한 기능들을 수행
+	@Around("execution(* com.kh.service.SampleService*.*(..))")
 	public Object logTime(ProceedingJoinPoint joinPoint) {
 		long start = System.currentTimeMillis();
 		
 		log.info("Target : " + joinPoint.getTarget());
 		log.info("Param : " + Arrays.toString(joinPoint.getArgs()));
 		
-		Object result = null; 
+		Object result = null;
 		
 		try {
 			result = joinPoint.proceed();
@@ -50,9 +50,13 @@ public class LogAspect {
 		
 		long end = System.currentTimeMillis();
 		
-		log.info("TIME : " + (end - start) + "ms"); //걸린시간계산
+		log.info("TIME : " + (end - start) + "ms");
 		
 		return result;
 	}
-
 }
+
+
+
+
+
