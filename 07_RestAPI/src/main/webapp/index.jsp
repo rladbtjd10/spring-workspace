@@ -38,22 +38,22 @@
 	</form>
 <script>
 function list() {
-    $.ajax({
-        url: 'http://localhost:8080/api/phone', 
+	$.ajax({
+		url : 'http://localhost:8080/api/phone',
         type: 'get', // HTTP 요청 메서드 (GET 요청을 보냅니다)
         success: function(data) {
         	// AJAX 요청이 성공하면 실행되는 함수입니다.
             // 서버에서 받은 데이터(data)를 반복하여 휴대전화 목록을 생성하고 HTML 테이블에 추가합니다.
         	//console.log(data);
         	let html = '';
-	        for (let phone of data) {
-	        	html += '<tr>' +
-		            '<td class="num">' + phone.num + '</td>' +
-		            '<td>' + phone.model + '</td>' +
-		            '<td>' + phone.price + '</td>' +
-		            '<td>' + phone.company.vendor + '</td>' +
-	            '</tr>';
-        	 }
+			for(let phone of data) {
+				html += '<tr>' +
+							'<td class="num">' + phone.num + '</td>' +
+							'<td>' + phone.model + '</td>' +
+							'<td>' + phone.price + '</td>' +
+							'<td>' + phone.company.vendor + '</td>' +
+						'<tr>';
+			}
 	        //$('#list').append(html);
                $('#list').html(html);
         },
@@ -67,35 +67,34 @@ list();
 
 // 상세 조회
 $('#list').on('click', '.num', function() {
-		
-	    $.ajax({
-	        url: 'http://localhost:8080/api/phone' + $(this).text(), 
-	        type: 'get',
-	        contentType: 'application/json',
-	        success: function(data) {
-	            $('#num').val(data.num); //$('#num').val 부분이 해당하는 부분으로가는거 val()안은 값을 넣는것
-	            $('#model').val(data.model);
-	            $('#price').val(data.price);
-	            $('#vcode').val(data.vcode);
+	console.log($(this).text());
+	$.ajax({
+		url: 'http://localhost:8080/api/phone/' + $(this).text(),
+		type: 'get',
+		success:function(data) {
+			$('#num').val(data.num);
+			$('#model').val(data.model);
+			$('#price').val(data.price);
+			$('#vcode').val(data.vcode);
 	        }
 	    });
 });
 
 // 추가
 $('#insert').on('click', function() {
-	//JSON 방식으로 전달!
+	// JSON 방식으로 전달!
 	let phone = {
 		num: $('#num').val(),
 		model: $('#model').val(),
 		price: $('#price').val(),
 		vcode: $('#vcode').val()
 	};
-    $.ajax({
-        url: 'http://localhost:8080/api/phone', 
-        type: 'post', 
-        data: JSON.stringfly(phone),
-        contentType: 'application/json',
-        success: function() {
+	$.ajax({
+		url: 'http://localhost:8080/api/phone',
+		type: 'post',
+		data: JSON.stringify(phone),
+		contentType: 'application/json',
+		success:function() {
         	//$('#list').html(''); //$('#list').append(html);방식
         	list(); //$('#list').html(html);방식
         }
@@ -105,17 +104,17 @@ $('#insert').on('click', function() {
 //수정
 $('#update').on('click', function() {
 	let phone = {
-			num: $('#num').val(),
-			model: $('#model').val(),
-			price: $('#price').val(),
-			vcode: $('#vcode').val()
-		};
-	    $.ajax({
-	        url: 'http://localhost:8080/api/phone', 
-	        type: 'put', 
-	        data: JSON.stringfly(phone),
-	        contentType: 'application/json',
-	        success: function() {
+		num: $('#num').val(),
+		model: $('#model').val(),
+		price: $('#price').val(),
+		vcode: $('#vcode').val()
+	};
+	$.ajax({
+		url: 'http://localhost:8080/api/phone',
+		type: 'put',
+		data: JSON.stringify(phone),
+		contentType: 'application/json',
+		success:function() {
 	        	//$('#list').html(''); //$('#list').append(html);방식
 	        	list(); //$('#list').html(html);방식
 	        }
@@ -125,16 +124,17 @@ $('#update').on('click', function() {
 //삭제
 $('#delete').on('click', function() {
 	$.ajax({
-        url: 'http://localhost:8080/api/phone' + $('num').val(), 
-        type: 'delete',
-        success: function(data) {
-            list();
-            $('#num').val("");
-            $('#model').val("");
-            $('#price').val("");
-            $('#vcode').val("10");
-        }
-    });
+		url: 'http://localhost:8080/api/phone/' + $('#num').val(),
+		type: 'delete',
+		success:function(data) {
+			list();
+			$('#num').val("");
+			$('#model').val("");
+			$('#price').val("");
+			$('#vcode').val("10");
+		}
+	});
+});
 
 </script>
 	
